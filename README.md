@@ -22,12 +22,4 @@ EchoLearn is a peer-to-peer skill exchange platform. Users list the skills they 
 - **Real-time:** Socket.IO, WebRTC
 - **Matching:** natural (TF-IDF)
 
-## Getting Started
 
-```bash
-git clone https://github.com/YOUR_USERNAME/Echolearn.git
-cd Echolearn
-npm install
-```
-
-Create a `.env` file in the project root:
