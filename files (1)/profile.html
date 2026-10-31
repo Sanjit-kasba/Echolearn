@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Profile | EchoLearn</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="form-container">
+    <h2>Your Profile</h2>
+    <div id="profileDetails"></div>
+    <button onclick="window.location.href='edit-profile.html'">Edit Profile</button>
+    <button onclick="window.location.href='dashboard.html'">Back to Dashboard</button>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const userId = localStorage.getItem('userId');
+      if (!userId) return window.location.href = 'login.html';
+
+      const container = document.getElementById('profileDetails');
+
+      try {
+        const res = await fetch(`/api/user/${userId}`);
+        if (!res.ok) throw new Error('load failed');
+        const user = await res.json();
+
+        // textContent (not innerHTML) so profile text can't inject HTML/scripts
+        const rows = [
+          ['Name', user.name],
+          ['Email', user.email],
+          ['Age', user.age],
+          ['Location', user.location],
+          ['Bio', user.bio],
+          ['Skills You Can Teach', (user.skillsHave || []).join(', ')],
+          ['Skills You Want to Learn', (user.skillsWant || []).join(', ')]
+        ];
+
+        for (const [label, value] of rows) {
+          const p = document.createElement('p');
+          const strong = document.createElement('strong');
+          strong.textContent = label + ': ';
+          p.appendChild(strong);
+          p.appendChild(document.createTextNode(value ?? ''));
+          container.appendChild(p);
+        }
+      } catch (err) {
+        container.textContent = 'Could not load profile.';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Rate Your Chat | EchoLearn</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background-color: #0f172a;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #fff;
+      margin: 0;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 2rem;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 450px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+
+    .stars {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .stars input {
+      display: none;
+    }
+
+    .stars label {
+      font-size: 2rem;
+      color: #ccc;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .stars input:checked ~ label,
+    .stars label:hover,
+    .stars label:hover ~ label {
+      color: gold;
+    }
+
+    textarea {
+      width: 100%;
+      border-radius: 8px;
+      padding: 10px;
+      resize: none;
+      height: 100px;
+      margin-top: 1rem;
+      font-size: 14px;
+    }
+
+    button {
+      margin-top: 1rem;
+      padding: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(to right, #00c6ff, #00ff99);
+      font-weight: bold;
+      color: #000;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    h2 {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>How was your chat with <span id="partnerNameDisplay">Partner</span>?</h2>
+
+    <form id="feedbackForm">
+      <div class="stars">
+        <input type="radio" name="rating" id="star5" value="5"><label for="star5">&#9733;</label>
+        <input type="radio" name="rating" id="star4" value="4"><label for="star4">&#9733;</label>
+        <input type="radio" name="rating" id="star3" value="3"><label for="star3">&#9733;</label>
+        <input type="radio" name="rating" id="star2" value="2"><label for="star2">&#9733;</label>
+        <input type="radio" name="rating" id="star1" value="1"><label for="star1">&#9733;</label>
+      </div>
+
+      <textarea id="comment" placeholder="Leave your feedback..."></textarea>
+      <button type="submit">Submit Feedback</button>
+    </form>
+  </div>
+
+  <script src="feedback.js"></script>
+</body>
+</html>

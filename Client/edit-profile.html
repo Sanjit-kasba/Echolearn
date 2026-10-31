@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Edit Profile | EchoLearn</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="form-container">
+    <h2>Edit Profile</h2>
+    <form id="editForm">
+      <input type="text" id="name" placeholder="Name" required />
+      <input type="number" id="age" placeholder="Age" required />
+      <input type="text" id="location" placeholder="Location" required />
+      <textarea id="bio" placeholder="Bio" rows="3"></textarea>
+      <textarea id="skillsHave" placeholder="Skills You Can Teach (comma separated)" rows="2"></textarea>
+      <textarea id="skillsWant" placeholder="Skills You Want to Learn (comma separated)" rows="2"></textarea>
+      <button type="submit">Save Changes</button>
+      <button type="button" onclick="window.location.href='profile.html'">Cancel</button>
+    </form>
+  </div>
+
+  <script>
+    const userId = localStorage.getItem('userId');
+    if (!userId) window.location.href = 'login.html';
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      const res = await fetch(`/api/user/${userId}`);
+      const user = await res.json();
+
+      document.getElementById('name').value = user.name || '';
+      document.getElementById('age').value = user.age || '';
+      document.getElementById('location').value = user.location || '';
+      document.getElementById('bio').value = user.bio || '';
+      document.getElementById('skillsHave').value = user.skillsHave?.join(', ') || '';
+      document.getElementById('skillsWant').value = user.skillsWant?.join(', ') || '';
+    });
+
+    document.getElementById('editForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const data = {
+        name: document.getElementById('name').value.trim(),
+        age: +document.getElementById('age').value,
+        location: document.getElementById('location').value.trim(),
+        bio: document.getElementById('bio').value.trim(),
+        skillsHave: document.getElementById('skillsHave').value.split(',').map(s => s.trim()).filter(Boolean),
+        skillsWant: document.getElementById('skillsWant').value.split(',').map(s => s.trim()).filter(Boolean)
+      };
+
+      const res = await fetch(`/api/user/${userId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      if (res.ok) {
+        alert("Profile updated!");
+        window.location.href = 'profile.html';
+      } else {
+        alert("Update failed.");
+      }
+    });
+  </script>
+</body>
+</html>

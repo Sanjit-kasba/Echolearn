@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sign Up | EchoLearn</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="form-container">
+    <h2>Create Account</h2>
+    <p>Start swapping skills with peers today</p>
+
+    <form id="signupForm">
+      <input type="text" id="name" placeholder="Full Name" required />
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <input type="number" id="age" placeholder="Age" required />
+      <input type="text" id="skills" placeholder="Your Skills (e.g. Python, Guitar)" required />
+      <input type="text" id="wantsToLearn" placeholder="Want to Learn (e.g. Singing, ML)" required />
+      <button type="submit">Sign Up</button>
+      <p class="link">Already have an account? <a href="login.html">Login</a></p>
+    </form>
+  </div>
+
+  <script>
+    const toList = (v) => v.split(',').map(s => s.trim()).filter(Boolean);
+
+    document.getElementById("signupForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      // field names must match the server: skillsHave / skillsWant as arrays
+      const user = {
+        name: document.getElementById("name").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        password: document.getElementById("password").value,
+        age: Number(document.getElementById("age").value),
+        skillsHave: toList(document.getElementById("skills").value),
+        skillsWant: toList(document.getElementById("wantsToLearn").value)
+      };
+
+      try {
+        const res = await fetch("/api/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(user),
+        });
+
+        const data = await res.json();
+        if (data.success) {
+          alert("Registration successful!");
+          window.location.href = "login.html";
+        } else {
+          alert(data.message || "Signup failed");
+        }
+      } catch (err) {
+        alert("Cannot reach the server.");
+      }
+    });
+  </script>
+</body>
+</html>

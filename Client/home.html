@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>EchoLearn | Teach & Learn</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to right, #0f172a, #1e293b);
+      color: white;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #0f172a;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #3b82f6;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .btn {
+      padding: 0.4rem 1rem;
+      border-radius: 8px;
+      background-color: #3b82f6;
+      color: white;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #60a5fa;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #cbd5e1;
+      margin-bottom: 2rem;
+    }
+
+    .cta {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .section {
+      padding: 4rem 2rem;
+      background-color: #1e293b;
+      text-align: center;
+    }
+
+    .features {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .feature {
+      background-color: #334155;
+      border-radius: 12px;
+      padding: 2rem;
+    }
+
+    .feature i {
+      font-size: 2.5rem;
+      color: #3b82f6;
+      margin-bottom: 1rem;
+    }
+
+    .feature h3 {
+      color: white;
+    }
+
+    .footer {
+      background-color: #0f172a;
+      padding: 3rem 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      color: #cbd5e1;
+    }
+
+    .footer h4 {
+      color: #3b82f6;
+      margin-bottom: 1rem;
+    }
+
+    .footer a {
+      display: block;
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    .footer a:hover {
+      color: #60a5fa;
+    }
+
+    .footer .newsletter input {
+      width: 100%;
+      padding: 0.5rem;
+      border: none;
+      border-radius: 6px;
+      margin-top: 0.5rem;
+    }
+
+    .bottom-bar {
+      background-color: #0f172a;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.85rem;
+      color: #94a3b8;
+      border-top: 1px solid #1e293b;
+    }
+
+    .profile-dropdown {
+      position: relative;
+    }
+
+    .profile-icon {
+      width: 38px;
+      height: 38px;
+      background-color: #3b82f6;
+      color: white;
+      font-weight: bold;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 45px;
+      right: 0;
+      background-color: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      z-index: 1000;
+      min-width: 140px;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 10px;
+      color: white;
+      text-decoration: none;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #334155;
+    }
+
+    @media (min-width: 768px) {
+      .features {
+        flex-direction: row;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+      }
+
+      .hero p {
+        font-size: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">EchoLearn</div>
+    <div class="nav-links">
+      <a href="#how">How It Works</a>
+      <a href="login.html" class="btn">Log In</a>
+      <a href="signup.html" class="btn">Sign Up</a>
+
+      <div class="profile-dropdown">
+        <div class="profile-icon" onclick="toggleDropdown()">P</div>
+        <div class="dropdown-content" id="dropdownMenu">
+          <a href="profile.html">View Profile</a>
+          <a href="#" onclick="logout()">Logout</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h1>Teach what you know.<br>Learn what you love.</h1>
+    <p>Connect with passionate people to exchange skills and knowledge in a vibrant community.</p>
+    <button class="cta" onclick="window.location.href='login.html'">Get Started – It's Free</button>
+  </section>
+
+  <section id="how" class="section">
+    <h2>How EchoLearn Works</h2>
+    <div class="features">
+      <div class="feature">
+        <i class="fas fa-chalkboard-teacher"></i>
+        <h3>Teach</h3>
+        <p>Share your expertise by offering 1-on-1 lessons or helping others learn what you love.</p>
+      </div>
+      <div class="feature">
+        <i class="fas fa-book-open"></i>
+        <h3>Learn</h3>
+        <p>Discover new skills by connecting with people eager to teach in real time.</p>
+      </div>
+      <div class="feature">
+        <i class="fas fa-users"></i>
+        <h3>Connect</h3>
+        <p>Build meaningful relationships while growing together through mutual learning.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div>
+      <h4>EchoLearn</h4>
+      <p>The peer-to-peer platform for skill exchange and lifelong learning.</p>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <a href="#">About Us</a>
+      <a href="#">Careers</a>
+      <a href="#">Blog</a>
+      <a href="#">Press</a>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <a href="#">Help Center</a>
+      <a href="#">Community</a>
+      <a href="#">Guidelines</a>
+      <a href="#">Webinars</a>
+    </div>
+    <div class="newsletter">
+      <h4>Connect</h4>
+      <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+      <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+      <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+      <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
+      <label style="display:block; margin-top: 1rem;">Subscribe to our newsletter</label>
+      <input type="email" placeholder="Your email" style="max-width: 220px; width: 100%; margin-top: 0.5rem; border-radius: 6px; border: none; padding: 0.5rem;" />
+    </div>
+  </footer>
+
+  <div class="bottom-bar">
+    © 2025 EchoLearn. All rights reserved. &nbsp;&nbsp;&nbsp; Terms | Privacy | Cookies
+  </div>
+
+  <script>
+    function toggleDropdown() {
+      const menu = document.getElementById("dropdownMenu");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+
+    function logout() {
+      localStorage.clear();
+      window.location.href = 'login.html';
+    }
+
+    // Close dropdown if clicking outside
+    window.addEventListener('click', function (e) {
+      if (!e.target.closest('.profile-dropdown')) {
+        document.getElementById("dropdownMenu").style.display = "none";
+      }
+    });
+  </script>
+
+</body>
+</html>

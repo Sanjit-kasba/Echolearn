@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Camera Test</title>
+</head>
+<body>
+  <h2>Camera Test</h2>
+  <video id="video" autoplay playsinline></video>
+
+  <script>
+    async function testCamera() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+          audio: false
+        });
+        document.getElementById('video').srcObject = stream;
+      } catch (err) {
+        alert('ERROR: ' + err.name + '\n' + err.message);
+        console.error(err);
+      }
+    }
+
+    testCamera();
+  </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EchoLearn - Match</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    const userId = localStorage.getItem("userId");
+    if (!userId) {
+      window.location.href = "login.html"; // Force login if not logged in
+    }
+  </script>
+</head>
+<body>
+  <div class="main">
+    <h2>Welcome to EchoLearn</h2>
+    <p>Connect by teaching and learning from each other.</p>
+
+    <input type="text" id="teach" placeholder="Skill you can teach" />
+    <input type="text" id="learn" placeholder="Skill you want to learn" />
+    <button onclick="searchMatch()">Search Match</button>
+  </div>
+
+  <script>
+    async function searchMatch() {
+      const teach = document.getElementById('teach').value.trim().toLowerCase();
+      const learn = document.getElementById('learn').value.trim().toLowerCase();
+      const userId = localStorage.getItem("userId");
+
+      const res = await fetch('/api/match', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId, teach, learn })
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        alert("Match found! Redirecting to chat...");
+        setTimeout(() => {
+          window.location.href = "chat.html";
+        }, 1500);
+      } else {
+        alert("No match found yet. Please try again later.");
+      }
+    }
+  </script>
+</body>
+</html>

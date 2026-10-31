@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Live Chat | EchoLearn</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .chat-container {
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: #1e293b;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .chat-input {
+      display: flex;
+      gap: 10px;
+      margin-top: 1rem;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .chat-input button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: #3b82f6;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .chat-input button:hover {
+      background-color: #2563eb;
+    }
+
+    .chat-btn {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      color: white;
+    }
+
+    #videoContainer {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    video {
+      width: 48%;
+      border: 2px solid #00c6ff;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <h2>Live Chat</h2>
+
+    <textarea id="messageBox" readonly rows="15" style="width: 100%; margin-bottom: 1rem;"></textarea>
+
+    <div class="chat-input">
+      <input type="text" id="messageInput" placeholder="Type your message..." autocomplete="off" />
+      <button id="sendBtn">Send</button>
+      <button id="startVideoBtn">Start Video Call</button>
+    </div>
+
+    <div style="margin-top: 1.5rem; display: flex; justify-content: space-between;">
+      <button onclick="endChat()" class="chat-btn" style="background-color: #ef4444;">End Chat</button>
+      <button onclick="goBack()" class="chat-btn" style="background-color: #6b7280;">Back</button>
+    </div>
+
+    <!-- Video Section -->
+    <div id="videoContainer" style="display: none;">
+      <video id="localVideo" autoplay muted playsinline></video>
+      <video id="remoteVideo" autoplay playsinline></video>
+    </div>
+    <div id="videoControls" style="display: none; margin-top: 1rem; text-align: center;">
+      <button id="shareScreenBtn" class="chat-btn" style="background-color: #10b981; margin-right: 8px;">🖥️ Share Screen</button>
+      <button onclick="endVideoCall()" class="chat-btn" style="background-color: #f97316;">End Video Call</button>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="chat.js"></script>
+</body>
+</html>

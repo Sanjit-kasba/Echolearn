@@ -1,0 +1,19 @@
+{
+  "name": "echo-learn",
+  "version": "1.0.0",
+  "description": "Skill swap platform with live chat and matching",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.1",
+    "mongoose": "^7.5.0",
+    "natural": "^8.1.0",
+    "socket.io": "^4.7.2"
+  }
+}

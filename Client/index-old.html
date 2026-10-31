@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EchoLearn - Match</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="main">
+    <div class="card">
+      <h2>Welcome to EchoLearn</h2>
+      <p>Connect by teaching and learning from each other.</p>
+
+      <input type="text" id="teach" placeholder="Skill you can teach" />
+      <input type="text" id="learn" placeholder="Skill you want to learn" />
+      <button id="searchBtn">Search Match</button>
+
+      <div id="matchStatus" class="match-result"></div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+    const userId = localStorage.getItem("userId");
+
+    if (!userId) {
+      window.location.href = "login.html"; // Redirect if not logged in
+    }
+
+    document.getElementById("searchBtn").addEventListener("click", () => {
+      const teach = document.getElementById("teach").value.trim().toLowerCase();
+      const learn = document.getElementById("learn").value.trim().toLowerCase();
+
+      if (!teach || !learn) {
+        alert("Please fill in both skills.");
+        return;
+      }
+
+      // Emit real-time match request
+      socket.emit("findMatch", { userId, teachNow: teach, learnNow: learn });
+
+      document.getElementById("matchStatus").innerHTML =
+        "<p style='color:lightgray'>⏳ Searching for a match...</p>";
+    });
+
+    socket.on("matchFound", ({ partnerId }) => {
+      localStorage.setItem("partnerId", partnerId);
+      alert("🎉 Match found! Redirecting to chat...");
+      window.location.href = "chat.html";
+    });
+  </script>
+</body>
+</html>
